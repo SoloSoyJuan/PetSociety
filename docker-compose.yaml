@@ -6,15 +6,16 @@ services:
     ports:
       - "5432:5432"
     environment:
+      POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
-    container_name: car_dealership
+    container_name: PetSocietyVeterinary
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin4_container
+    container_name: pgadmin4_container_PetSociety
     restart: always
     ports:
       - "8888:80"
