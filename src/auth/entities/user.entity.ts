@@ -17,7 +17,7 @@ export class User {
   @Column('text', {select: false})
   password: string;
 
-  @Column('text', {array:true, default:['owner']})
+  @Column('text', {default:'owner'})
   role: string;
 
   @OneToMany(() => Patient, (patient) => patient.user)
