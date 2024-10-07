@@ -4,7 +4,7 @@ import { Pet } from 'src/pets/entities/pet.entity';
 
 @Entity('patients')
 export class Patient {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @ManyToOne(() => User, (user) => user.patients)

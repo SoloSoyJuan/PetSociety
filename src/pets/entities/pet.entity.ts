@@ -5,7 +5,7 @@ import { MedicalRecord } from 'src/medical_records/entities/medical_record.entit
 
 @Entity('pets')
 export class Pet {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column({ length: 255 })

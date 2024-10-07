@@ -11,6 +11,7 @@ import { PatientsModule } from 'src/patients/patients.module';
     PatientsModule
   ],
   controllers: [PetsController],
-  providers: [PetsService]
+  providers: [PetsService],
+  exports: [PetsService]
 })
 export class PetsModule {}

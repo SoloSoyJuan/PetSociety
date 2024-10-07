@@ -5,7 +5,7 @@ import { MedicalRecord } from 'src/medical_records/entities/medical_record.entit
 
 @Entity('appointments')
 export class Appointment {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   appointment_id: number;
 
   @ManyToOne(() => Pet, (pet) => pet.appointments, { onDelete: 'CASCADE' })
