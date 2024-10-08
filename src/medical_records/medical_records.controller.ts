@@ -1,9 +1,10 @@
-import { Body, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { Controller } from '@nestjs/common';
+import { Body, Delete, Get, Param, Patch, Post, Controller, UseGuards } from '@nestjs/common';
 import { MedicalRecordsService } from './medical_records.service';
 import { CreateMedicalRecordsDto } from './dtos/create-medical_records.dto';
 import { UpdateMedicalRecords } from './dtos/update-medical_records.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('medical-records')
 export class MedicalRecordsController {
 

@@ -1,8 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Delete, Get, Param, Patch, Post, Controller, UseGuards } from '@nestjs/common';
 import { CreatePetDto } from './dtos/create-pet.dto';
 import { PetsService } from './pets.service';
 import { UpdatePetDto } from './dtos/update-pet.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('pets')
 export class PetsController {
 
