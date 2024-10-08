@@ -1,5 +1,4 @@
-import { IsEmail, IsOptional, IsString, Matches, MinLength, IsNotEmpty } from "class-validator";
-import { Patient } from "src/patients/entities/patients.entity";
+import { IsString, MinLength, IsNotEmpty } from "class-validator";
 
 export  class  CreatePetDto {
     @IsString()
