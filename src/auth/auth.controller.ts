@@ -20,6 +20,14 @@ export class AuthController {
     return this.authService.loginUser(loginUserDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @Post('logout')
+  async logout(@Req() req) {
+    const userId = req.user.id;
+    await this.authService.logout(userId);
+    return { message: 'Logout successful' };
+  }
+
   @UseGuards(JwtAuthGuard)
   @Get()
   async getAllUsers() {

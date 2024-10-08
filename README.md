@@ -58,6 +58,21 @@ $ yarn run test:e2e
 $ yarn run test:cov
 ```
 
+## Pruebas con Postman
+Para probar la API, hemos proporcionado una colección de Postman que contiene todas las solicitudes necesarias.
+
+* Descarga e instala Postman.
+* Abre Postman y haz clic en "Import".
+* Selecciona el archivo PetSociety_API.postman_collection.json ubicado en la carpeta postman de este proyecto.
+* Una vez importada, verás una nueva colección llamada "PetSociety API" en tu barra lateral de Postman.
+* Asegurarse del servidor en funcionamiento.
+* Comienza con la solicitud de registro y luego inicia sesión para obtener un token JWT.
+* Las demás solicitudes utilizarán automáticamente este token para la autenticación.
+* (En caso de tener la url global de localhost utilizar la del despliegue presentada en la entrega).
+
+Nota: Algunas solicitudes pueden requerir que modifiques los datos en el cuerpo de la solicitud según tus necesidades específicas de prueba(Prestar atención a los campos ID que deben ya estar creados para registrarse y en caso de veterinario usar ID de User).
+
+
 ## Resources
 
 Check out a few resources that may come in handy when working with NestJS:
