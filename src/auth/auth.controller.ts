@@ -17,7 +17,10 @@ import { UpdateUserDto } from './dtos/update-user.dto';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { Response } from 'express';
 import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from './guards/roles.guard';
+import { Roles } from './decorators/roles.decorator';
 
+@UseGuards(RolesGuard)
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -42,6 +45,7 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
+  @Roles('admin')
   async getAllUsers() {
     return await this.authService.findAllUsers();
   }
@@ -54,6 +58,7 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get('role/:role')
+  @Roles('admin')
   async getUsersByRole(@Param('role') role: string) {
     return await this.authService.findUsersByRole(role);
   }
@@ -69,6 +74,7 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
+  @Roles('admin')
   async deleteUser(@Param('id') id: number) {
     return await this.authService.deleteUser(id);
   }
