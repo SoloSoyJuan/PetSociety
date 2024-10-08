@@ -5,13 +5,15 @@ import { Repository } from 'typeorm';
 import { CreatePetDto } from './dtos/create-pet.dto';
 import { PatientsService } from 'src/patients/patients.service';
 import { UpdatePetDto } from './dtos/update-pet.dto';
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class PetsService {
 
     constructor(
         @InjectRepository(Pet) private readonly petRepository: Repository<Pet>,
-        private readonly patientsService: PatientsService
+        private readonly patientsService: PatientsService,
+        private readonly authService: AuthService
     ){}
 
     async createPet(createPetDto: CreatePetDto) {
@@ -43,11 +45,12 @@ export class PetsService {
 
     async updatePet(id: number, updatePetDto: UpdatePetDto){
 
-        const patient = await 
+        const patient = await this.authService.findUserById(updatePetDto.patient);
 
         const pet = await this.petRepository.preload({
             id,
             ...updatePetDto,
+            patient
         });
 
         if(!pet){
