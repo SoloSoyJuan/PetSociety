@@ -46,7 +46,7 @@ export class AuthController {
   @Post('create-admin')
   @Roles('admin')
   createAdmin(@Body() createUserDto: CreateUserDto) {
-    return this.authService.createUser({ ...createUserDto, role: 'admin' });
+    return this.authService.createUser({ ...createUserDto});
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)

@@ -6,8 +6,8 @@ import { Pet } from 'src/pets/entities/pet.entity';
 export class Patient {
   @PrimaryGeneratedColumn('uuid')
   id: number;
-
-  @ManyToOne(() => User, (user) => user.patients)
+  
+  @ManyToOne(() => User, (user) => user.patients, { onDelete: 'CASCADE' })
   user: User;
 
   @Column({ length: 255 })

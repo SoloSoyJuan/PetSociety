@@ -20,7 +20,7 @@ export class User {
   @Column('text', {default:'owner'})
   role: string;
 
-  @OneToMany(() => Patient, (patient) => patient.user)
+  @OneToMany(() => Patient, (patient) => patient.user, { cascade: true })
   patients: Patient[];
 
   @OneToMany(() => Appointment, (appointment) => appointment.veterinarian)
