@@ -35,5 +35,5 @@ export  class  UpdatePetDto {
     @IsOptional()
     @IsString()
     @MinLength(3)
-    patient: Patient;
+    patient: number;
 }

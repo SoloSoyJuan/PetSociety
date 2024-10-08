@@ -43,6 +43,8 @@ export class PetsService {
 
     async updatePet(id: number, updatePetDto: UpdatePetDto){
 
+        const patient = await 
+
         const pet = await this.petRepository.preload({
             id,
             ...updatePetDto,
