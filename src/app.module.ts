@@ -10,6 +10,7 @@ import { PetsModule } from './pets/pets.module';
 import { AppointmentsModule } from './appointments/appointments.module';
 import { MedicalRecordsModule } from './medical_records/medical_records.module';
 import { ServicesModule } from './services/services.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -24,8 +25,8 @@ import { ServicesModule } from './services/services.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-
-    AuthModule, CommonModule, PatientsModule, PetsModule, AppointmentsModule, MedicalRecordsModule, ServicesModule
+    
+    SeedModule, AuthModule, CommonModule, PatientsModule, PetsModule, AppointmentsModule, MedicalRecordsModule, ServicesModule
   ],
   controllers: [AppController],
   providers: [AppService],
