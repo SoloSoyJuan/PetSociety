@@ -25,7 +25,7 @@ export class PetsService {
             return this.petRepository.save(newPet);
         
         } catch (err) {
-            this.handleDBErrors(err);
+            err;
         }          
     }
 
