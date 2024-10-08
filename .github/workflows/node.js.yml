@@ -22,11 +22,11 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
+        cache: 'npm'
 
-    - run: yarn install
+    - run: npm install
 
     # Verifica si existe un script build antes de ejecutarlo
-    - run: if [ -f package.json ] && grep -q '"build":' package.json; then yarn build; fi
+    - run: if [ -f package.json ] && grep -q '"build":' package.json; then npm run build; fi
 
-    - run: yarn test
+    - run: npm test
