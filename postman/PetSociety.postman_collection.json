@@ -35,7 +35,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"usuario@ejemplo.com\",\r\n  \"password\": \"contraseña123\"\r\n}",
+							"raw": "{\r\n//  \"email\": \"dueño@ejemplo.com\",\r\n  \"email\": \"admin@example.com\",\r\n  \"password\": \"admin123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1582,7 +1582,7 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "http://localhost:3000",
+			"value": "https://petsociety-production.up.railway.app",
 			"type": "string"
 		},
 		{
