@@ -1,9 +1,21 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { AuthService } from './auth.service';
 import { LoginUserDto } from './dtos/login-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { JwtAuthGuard } from './jwt-auth.guard';
+import { Response } from 'express';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
@@ -22,10 +34,10 @@ export class AuthController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post('logout')
-  async logout(@Req() req) {
-    const userId = req.user.id;
-    await this.authService.logout(userId);
-    return { message: 'Logout successful' };
+  logout(@Res() res: Response) {
+    // Limpiar la cookie o token
+    res.clearCookie('token'); // Solo si usas cookies para el token
+    return res.status(200).json({ message: 'Logged out successfully' });
   }
 
   @UseGuards(JwtAuthGuard)
@@ -36,8 +48,8 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  async getUserById(@Param('id') id: number){
-    return await this.authService.findUserById(id)
+  async getUserById(@Param('id') id: number) {
+    return await this.authService.findUserById(id);
   }
 
   @UseGuards(JwtAuthGuard)

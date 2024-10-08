@@ -53,12 +53,7 @@ export class AuthService {
       token: this.jwtService.sign({ user_id: user.id }),
     };
   }
-
-  logout(token: string): { message: string } {
-    console.log('Token marked as expired:', token);
-    return { message: 'Logout successful' };
-  }
-
+  
   async findAllUsers() {
     return await this.userRepository.find();
   }
