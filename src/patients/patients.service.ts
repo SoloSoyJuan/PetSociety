@@ -22,9 +22,9 @@ export class PatientsService {
         return this.patientRepository.save(newPatient);
     }
 
-    async findAllPatient(){
-        return await this.patientRepository.find();
-    }
+    async findAllPatient(): Promise<Patient[]> {
+        return await this.patientRepository.find({ relations: ['user', 'pets'] });
+    }    
 
     async findPatientById(id: number) {
         const patient = await this.patientRepository.findOne({ where: { id }});
