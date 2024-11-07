@@ -25,8 +25,8 @@ export class PatientsController {
 
     @Get(':id')
     @Roles('admin', 'vet', 'owner')
-    async getPatientById(@Param('id') id: number){
-        return await this.patientsService.findPatientById(id)
+    async getPatientById(@Param('id') id: number) {
+        return await this.patientsService.findPatientById(id);
     }
 
     @Patch(':id')
@@ -43,5 +43,4 @@ export class PatientsController {
     async deletePatient(@Param('id') id: number) {
         return await this.patientsService.deletePatient(id);
     }
-
 }
