@@ -13,7 +13,6 @@ export class PatientsController {
     constructor(private readonly patientsService: PatientsService) {}
 
     @Post('register')
-    @Roles('admin', 'vet')
     createPatient(@Body() createPatientDto: CreatePatientDto) {
         return this.patientsService.createPatient(createPatientDto);
     }
