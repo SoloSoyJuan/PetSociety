@@ -27,7 +27,7 @@ export class PatientsService {
     }    
 
     async findPatientById(id: number) {
-        const patient = await this.patientRepository.findOne({ where: { id }});
+        const patient = await this.patientRepository.findOne({ where: { id }, relations: ['user', 'pets']});
         if(!patient) {
             throw new NotFoundException(`Patient with ID ${id} not found`)
         }

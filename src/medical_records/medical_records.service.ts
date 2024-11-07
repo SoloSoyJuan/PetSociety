@@ -34,11 +34,11 @@ export class MedicalRecordsService {
     }
 
     async findAllMedicalRecords() {
-        return await this.medicalRecordRepository.find();
+        return await this.medicalRecordRepository.find({relations: ['veterinarian', 'pet', 'appointment']});
     }
 
     async findMedicalRecordById(record_id: number) {
-        const medicalRecord = await this.medicalRecordRepository.findOne({ where: { record_id } });
+        const medicalRecord = await this.medicalRecordRepository.findOne({ where: { record_id }, relations: ['veterinarian', 'pet', 'appointment'] });
         if (!medicalRecord) {
             throw new NotFoundException(`Medical Record with ID ${record_id} not found`);
         }

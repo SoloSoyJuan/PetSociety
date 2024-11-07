@@ -30,11 +30,11 @@ export class PetsService {
     }
 
     async findAllPets() {
-        return await this.petRepository.find();
+        return await this.petRepository.find({ relations: ['patient'] });
     }
 
     async findPetById(id: number){
-        const pets = await this.petRepository.find({where:{ id }});
+        const pets = await this.petRepository.find({where:{ id }, relations: ['patient']});
 
         if(!pets){
             throw new NotFoundException(`Pet with ID ${id} not found`)

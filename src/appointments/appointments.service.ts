@@ -27,11 +27,11 @@ export class AppointmentsService {
     }
 
     async findAllAppointment() {
-        return await this.appointmentRepository.find();
+        return await this.appointmentRepository.find({relations: ['veterinarian', 'pet']});
     }
 
     async findAppointmentById(appointment_id: number) {
-        const appointment = await this.appointmentRepository.findOne({ where: { appointment_id } });
+        const appointment = await this.appointmentRepository.findOne({ where: { appointment_id }, relations: ['veterinarian', 'pet'] });
         if (!appointment) {
             throw new NotFoundException(`Service with ID ${appointment_id} not found`);
         }
@@ -39,7 +39,7 @@ export class AppointmentsService {
     }
 
     async findAppointmentsByStatus(status: string) {
-        const appointments = await this.appointmentRepository.find({ where: { status } });
+        const appointments = await this.appointmentRepository.find({ where: { status }, relations: ['veterinarian', 'pet'] });
     
         if (!appointments.length) {
           throw new NotFoundException(`No appointments found with the status '${status}'`);
