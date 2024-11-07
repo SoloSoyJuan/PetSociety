@@ -89,7 +89,7 @@ describe('AuthService', () => {
 
       expect(mockUserRepository.findOne).toHaveBeenCalledWith({
         where: { email: loginUserDto.email },
-        select: ['id', 'email', 'password'],
+        select: ['id', 'email', 'password', 'role'],
       });
       expect(bcrypt.compareSync).toHaveBeenCalledWith(loginUserDto.password, user.password);
       expect(result).toEqual({
