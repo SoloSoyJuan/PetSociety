@@ -20,7 +20,8 @@ export class MedicalRecordsService {
 
     async createMedicalRecord(createMedicalRecordDto: CreateMedicalRecordsDto) {
         try {
-            const pet = await this.petService.findPetById(createMedicalRecordDto.petId);
+            const thePet = await this.petService.findPetById(createMedicalRecordDto.petId);
+            const pet = thePet[0];
             const veterinarian = await this.authService.findUserById(createMedicalRecordDto.veterinarianId);
             const appointment = await this.appointmentsService.findAppointmentById(createMedicalRecordDto.appointmentId);
 
