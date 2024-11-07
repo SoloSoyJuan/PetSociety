@@ -96,6 +96,7 @@ describe('AuthService', () => {
         user_id: user.id,
         email: user.email,
         token: 'mockToken',
+        role: 'owner'
       });
     });
 
