@@ -6,7 +6,6 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 
-@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('patients')
 export class PatientsController {
 
@@ -17,18 +16,21 @@ export class PatientsController {
         return this.patientsService.createPatient(createPatientDto);
     }
 
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Get()
     @Roles('admin', 'vet')
     async getAllPatients() {
         return await this.patientsService.findAllPatient();
     }
 
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Get(':id')
     @Roles('admin', 'vet', 'owner')
     async getPatientById(@Param('id') id: number) {
         return await this.patientsService.findPatientById(id);
     }
 
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Patch(':id')
     @Roles('admin', 'vet')
     async updatePatient(
@@ -38,6 +40,7 @@ export class PatientsController {
         return await this.patientsService.updatePatient(id, updatePatientDto);
     }
 
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     @Roles('admin')
     async deletePatient(@Param('id') id: number) {
