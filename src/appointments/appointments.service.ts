@@ -4,27 +4,34 @@ import { Appointment } from './entities/appointments.entity';
 import { Repository } from 'typeorm';
 import { CreateAppointmentDto } from './dtos/create-appointment.dto';
 import { UpdateAppointmentDto } from './dtos/update-appointment.dto';
+import { AuthService } from 'src/auth/auth.service';
+import { PetsService } from 'src/pets/pets.service';
 
 @Injectable()
 export class AppointmentsService {
 
-    constructor(@InjectRepository(Appointment) private readonly appointmentRepository: Repository<Appointment>){}
+    constructor(
+        @InjectRepository(Appointment) private readonly appointmentRepository: Repository<Appointment>,
+        private readonly authService: AuthService,
+        private readonly petService: PetsService){}
 
-    async createAppointment(createAppointmentDto: CreateAppointmentDto) {
-        try{
-            const {...appointmentData} = createAppointmentDto;
-
-            const appointment = this.appointmentRepository.create({
-                ...appointmentData
-            });
-
-            await this.appointmentRepository.save(appointment);
-
-            return appointment;
-        }catch(e){
-            this.handleDBErrors(e);
+        async createAppointment(createAppointmentDto: CreateAppointmentDto) {
+            try {
+                // Espera a que se resuelvan ambas promesas
+                const veterinarian = await this.authService.findUserById(createAppointmentDto.veterinarianId);
+                const thepet = await this.petService.findPetById(createAppointmentDto.petId);
+                const pet = thepet[0];
+        
+                // Crea la cita combinando los datos
+                const appointmentData = { ...createAppointmentDto, veterinarian, pet };
+                const appointment = this.appointmentRepository.create(appointmentData);
+        
+                // Guarda y retorna la cita
+                return await this.appointmentRepository.save(appointment);
+            } catch (e) {
+                this.handleDBErrors(e);
+            }
         }
-    }
 
     async findAllAppointment() {
         return await this.appointmentRepository.find({relations: ['veterinarian', 'pet']});
